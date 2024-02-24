@@ -64,12 +64,8 @@ app.get("/traceroute", async (req, res) => {
     console.log(host);
 
     try {
-        // let hops = await getListOfHops(host);
-        let hops = [
-            { ip: "221.32.12.4" },
-            { ip: "211.32.12.4" },
-            { ip: "201.32.12.4" },
-        ];
+        let hops = await getListOfHops(host);
+
         hops.unshift({ ip: "" });
         console.log(hops);
 
