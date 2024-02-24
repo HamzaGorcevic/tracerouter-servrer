@@ -6,7 +6,9 @@ const express = require("express");
 const { exec } = require("child_process");
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
+const ipAddress = "0.0.0.0";
+
 app.use(express.static(__dirname));
 app.use(cors()); // Enable CORS for all routes
 
@@ -103,6 +105,6 @@ app.get("/cors", (req, res) => {
     res.send({ msg: "This has CORS enabled 🎈" });
 });
 
-app.listen(port, () => {
+app.listen(port, ipAddress, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
