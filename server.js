@@ -60,8 +60,6 @@ app.get("/ping", async (req, res) => {
 
 //
 app.get("/traceroute", async (req, res) => {
-    res.send("Traceroute");
-
     const host = req.query.url;
     console.log(host);
 
@@ -88,7 +86,7 @@ app.get("/traceroute", async (req, res) => {
                 }
             })
         );
-
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.json(results);
     } catch (error) {
         console.error("Error during traceroute:", error);
