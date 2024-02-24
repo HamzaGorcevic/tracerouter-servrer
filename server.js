@@ -83,21 +83,8 @@ app.get("/traceroute", async (req, res) => {
         hops.unshift({ ip: "" });
         console.log(hops);
 
-        const results = await Promise.all(
-            hops.map(async (item) => {
-                try {
-                    const response = await axios.get(
-                        `http://ip-api.com/json/${item.ip}`
-                    );
-                    return response.data;
-                } catch (error) {
-                    console.error("Error fetching IP information:", error);
-                    return {}; // Return empty object for the failed hop
-                }
-            })
-        );
         res.setHeader("Access-Control-Allow-Origin", "*");
-        res.json(results);
+        res.json(hops);
     } catch (error) {
         console.error("Error during traceroute:", error);
         res.status(500).json({ error: "error" });
