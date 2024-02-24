@@ -1,7 +1,7 @@
-const express = require("express");
 const ping = require("ping");
 const cors = require("cors");
 const axios = require("axios");
+const express = require("express");
 
 const { exec } = require("child_process");
 
@@ -84,6 +84,15 @@ app.get("/traceroute", async (req, res) => {
         console.error("Error during traceroute:", error);
         res.status(500).json({ error: "error" });
     }
+});
+
+app.get("/", (req, res) => {
+    res.send("Welcome to CORS server 😁");
+});
+
+app.get("/cors", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.send({ msg: "This has CORS enabled 🎈" });
 });
 
 app.listen(port, () => {
