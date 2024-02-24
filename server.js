@@ -41,6 +41,8 @@ function getListOfHops(destination) {
 }
 
 app.get("/ping", async (req, res) => {
+    res.send("PIng");
+
     const host = req.query.url || "www.novipazar.com";
 
     const options = {
@@ -57,11 +59,18 @@ app.get("/ping", async (req, res) => {
 
 //
 app.get("/traceroute", async (req, res) => {
+    res.send("Traceroute");
+
     const host = req.query.url;
     console.log(host);
 
     try {
-        let hops = await getListOfHops(host);
+        // let hops = await getListOfHops(host);
+        let hops = [
+            { ip: "221.32.12.4" },
+            { ip: "211.32.12.4" },
+            { ip: "201.32.12.4" },
+        ];
         hops.unshift({ ip: "" });
         console.log(hops);
 
