@@ -22,6 +22,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Private-Network", true);
     //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
     res.setHeader("Access-Control-Max-Age", 7200);
+    next();
 });
 
 const port = process.env.PORT || 8080;
@@ -53,7 +54,6 @@ app.post("/traceroute", async (req, res) => {
     const { destination } = req.body;
     console.log("destination:", destination);
     try {
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         const hops = await tracerouter.getListOfHops(destination);
         res.json(hops);
     } catch (error) {
