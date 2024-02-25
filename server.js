@@ -49,10 +49,14 @@ app.post("/traceroute", async (req, res) => {
 });
 
 app.get("/test", async (req, res) => {
-    await fetch("https://meme-api.com/gimme").then((response) => {
-        res.json(response);
-    });
-    res.send("THIS IS WORKING YEA BABY");
+    try {
+        const response = await fetch("https://meme-api.com/gimme");
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error("Error fetching meme:", error);
+        res.status(500).json({ error: "Error fetching meme" });
+    }
 });
 
 app.get("/", (req, res) => {
