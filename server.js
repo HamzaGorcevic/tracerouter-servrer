@@ -33,7 +33,7 @@ app.use(cors()); // Enable CORS for all routes
 //
 app.post("/traceroute", async (req, res) => {
     const { destination } = req.body;
-    console.log(destination);
+    console.log("destination:", destination);
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
         const hops = await tracerouter.getListOfHops(destination);
