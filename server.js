@@ -35,9 +35,9 @@ app.post("/traceroute", async (req, res) => {
     const { destination } = req.body;
     console.log(destination);
     try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
         const hops = await tracerouter.getListOfHops(destination);
         res.json(hops);
-        res.setHeader("Access-Control-Allow-Origin", requestingOrigin);
     } catch (error) {
         console.error("Error during traceroute:", error);
         res.status(500).json({ error: "Error during traceroute" });
