@@ -3,17 +3,19 @@ const cors = require("cors");
 const axios = require("axios");
 const express = require("express");
 const tracerouter = require("./tracerouter");
-const { exec } = require("child_process");
 
 const app = express();
-
-// Set middleware of CORS
-app.use(express.static(__dirname));
-app.use(express.json());
 const port = process.env.PORT || 8080;
 const ipAddress = "0.0.0.0";
+
+// Set middleware of CORS
+app.use(cors()); // Enable CORS for all routes
+app.use(express.static(__dirname));
+app.use(express.json());
+
+// Set CORS headers
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
     res.setHeader(
         "Access-Control-Allow-Methods",
         "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
@@ -24,29 +26,11 @@ app.use((req, res, next) => {
     );
     res.setHeader("Access-Control-Allow-Credentials", true);
     res.setHeader("Access-Control-Allow-Private-Network", true);
-    //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-    res.setHeader("Access-Control-Max-Age", 7200);
+    res.setHeader("Access-Control-Max-Age", 7200); // Set max age for preflight requests
     next();
 });
 
-// app.get("/ping", async (req, res) => {
-//     res.send("PIng");
-
-//     const host = req.query.url || "www.novipazar.com";
-
-//     const options = {
-//         timeout: 20,
-//     };
-
-//     try {
-//         const resultLatency = await ping.promise.probe(host, options);
-//         res.json(resultLatency);
-//     } catch (error) {
-//         res.status(500).json({ error: "Error during traceroute" });
-//     }
-// });
-
-//
+// Define your routes
 app.post("/traceroute", async (req, res) => {
     const { destination } = req.body;
     console.log("destination:", destination);
