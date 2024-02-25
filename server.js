@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Set CORS headers
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Allow requests from any origin
     res.setHeader(
         "Access-Control-Allow-Methods",
         "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
