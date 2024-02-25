@@ -8,6 +8,10 @@ const { exec } = require("child_process");
 const app = express();
 
 // Set middleware of CORS
+app.use(express.static(__dirname));
+app.use(express.json());
+const port = process.env.PORT || 8080;
+const ipAddress = "0.0.0.0";
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.setHeader(
@@ -24,13 +28,6 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Max-Age", 7200);
     next();
 });
-
-const port = process.env.PORT || 8080;
-const ipAddress = "0.0.0.0";
-
-app.use(express.static(__dirname));
-app.use(express.json());
-app.use(cors()); // Enable CORS for all routes
 
 // app.get("/ping", async (req, res) => {
 //     res.send("PIng");
