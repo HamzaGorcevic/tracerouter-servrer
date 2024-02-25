@@ -48,6 +48,13 @@ app.post("/traceroute", async (req, res) => {
     }
 });
 
+app.get("/test", async (req, res) => {
+    await fetch("https://meme-api.com/gimme").then((response) => {
+        res.json(response);
+    });
+    res.send("THIS IS WORKING YEA BABY");
+});
+
 app.get("/", (req, res) => {
     res.send("Welcome to CORS server 😁");
 });
