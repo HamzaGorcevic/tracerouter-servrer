@@ -1,6 +1,6 @@
 const Traceroute = require("nodejs-traceroute");
 
-async function getListOfHops(destination) {
+function getListOfHops(destination) {
     return new Promise((resolve, reject) => {
         const tracer = new Traceroute();
         const hops = [];

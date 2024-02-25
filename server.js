@@ -13,8 +13,9 @@ app.use(express.json());
 
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://hamzagorcevic.github.io",
+    "http://localhost:3000/traceroute",
 
+    "https://hamzagorcevic.github.io",
     "https://hamzagorcevic.github.io/traceroute",
 ];
 
