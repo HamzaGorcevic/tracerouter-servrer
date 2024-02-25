@@ -35,7 +35,7 @@ app.post("/traceroute", async (req, res) => {
     const { destination } = req.body;
     console.log("destination:", destination);
     try {
-        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         const hops = await tracerouter.getListOfHops(destination);
         res.json(hops);
     } catch (error) {
