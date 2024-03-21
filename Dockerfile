@@ -16,8 +16,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install nodejs-traceroute
-RUN npm install --save nodejs-traceroute
+RUN npm install
+
+
 
 # Copy the rest of the application
 COPY . .

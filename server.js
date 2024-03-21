@@ -35,13 +35,11 @@ app.use(
     })
 );
 
-// Define your routes
 app.post("/traceroute", async (req, res) => {
     const { destination } = req.body;
     console.log("destination:", destination);
     try {
-        const hops = await tracerouter.getListOfHops(destination);
-        res.json(hops);
+        tracerouter.getListOfHops(destination).then((hops) => res.json(hops));
     } catch (error) {
         console.error("Error during traceroute:", error);
         res.status(500).json({ error: "Error during traceroute" });
@@ -63,6 +61,6 @@ app.get("/", (req, res) => {
     res.send("Welcome to CORS server 😁");
 });
 
-app.listen(port, ipAddress, () => {
+app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
